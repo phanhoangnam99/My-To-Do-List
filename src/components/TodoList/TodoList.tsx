@@ -11,7 +11,7 @@ export default function TodoList() {
 
   const notdoneTodos = todos.filter((todo) => !todo.done)
 
-  const addTodo = (name: string) => {
+  const addTodo = (name: any) => {
     const todo: Todo = {
       name,
       done: false,
