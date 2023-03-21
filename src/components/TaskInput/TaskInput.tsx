@@ -1,3 +1,4 @@
+import { Input } from 'antd'
 import { useState } from 'react'
 import { Todo } from '../../@types/todo.type'
 import styles from './taskInput.module.scss'
@@ -42,6 +43,7 @@ export default function TaskInput(props: TaskInputProps) {
           value={currentTodo ? currentTodo.name : name}
           onChange={onChangeInput}
         />
+        
         <button type='submit'>{currentTodo ? '✔️' : '➕'}</button>
       </form>
     </div>
