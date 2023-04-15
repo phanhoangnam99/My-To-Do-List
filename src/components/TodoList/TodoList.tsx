@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Todo } from '../../@types/todo.type'
 import TaskInput from '../TaskInput'
 import TaskList from '../TaskList'
@@ -6,6 +7,10 @@ import styles from './todoList.module.scss'
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(null)
+
+  const [trigger, setTrigger] = useState(true)
+
+  const [formValue, setFormValue] = useState('')
 
   const doneTodos = todos.filter((todo) => todo.done)
 
@@ -62,7 +67,6 @@ export default function TodoList() {
   const deleteTodo = (id: string) => {
     if (currentTodo) {
       setCurrentTodo(null)
-     
     }
     setTodos((prev) => {
       const findIndexTodo = prev.findIndex((todo) => todo.id === id)
@@ -75,15 +79,27 @@ export default function TodoList() {
     })
   }
 
+  const handleTrigger = () => {
+    setTrigger(!trigger)
+  }
+
   return (
     <div className={styles.todoList}>
       <div className={styles.todoListContainer}>
-        <TaskInput addTodo={addTodo} currentTodo={currentTodo} editTodo={editTodo} finishEditTodo={finishEditTodo} />
+        <TaskInput
+          addTodo={addTodo}
+          currentTodo={currentTodo}
+          editTodo={editTodo}
+          finishEditTodo={finishEditTodo}
+          trigger={trigger}
+          formValue={formValue}
+        />
         <TaskList
           todos={notdoneTodos}
           handleDoneTodo={handleDoneTodo}
           startEditTodo={startEditTodo}
           deleteTodo={deleteTodo}
+          handleTrigger={handleTrigger}
         />
         <TaskList
           doneTaskList
@@ -91,6 +107,7 @@ export default function TodoList() {
           handleDoneTodo={handleDoneTodo}
           startEditTodo={startEditTodo}
           deleteTodo={deleteTodo}
+          handleTrigger={handleTrigger}
         />
       </div>
     </div>

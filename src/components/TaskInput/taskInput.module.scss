@@ -6,6 +6,7 @@
 .form {
   display: flex;
   align-items: center;
+  flex-wrap:wrap;
   input {
     height: 4rem;
     flex-grow: 1;
@@ -25,5 +26,9 @@
     align-items: center;
     padding:0;
     border-width: 1px;
+  }
+  p{
+    color:red;
+font-weight: 900;
   }
 }
